@@ -30,28 +30,28 @@ public class CompanyController {
 	
 	@GetMapping
 	public List<Company> getAllCompany(){
-		return companyService.getAllWorkers();
+		return companyService.getAllCompanies();
 		
 	}
 	
 	@PostMapping
 	public Company createCompany(@RequestBody Company newCompany) {
-		return companyService.saveOneWorker(newCompany);
+		return companyService.saveOneCompany(newCompany);
 	}
 	
 	@GetMapping("/{companyId}")
 	public Company getOneCompany(@PathVariable Long companyId) {
-		return companyService.getOneWorker(companyId);
+		return companyService.getOneCompany(companyId);
 	}
 	
 	@PutMapping("/{companyId}")
 	public Company updateCompany(@PathVariable Long companyId, @RequestBody Company newCompany) {
-		return companyService.updateOneWorker(companyId,newCompany);
+		return companyService.updateOneCompany(companyId,newCompany);
 	}
 	
 	@DeleteMapping("/{companyId}")
 	public void deleteOneCompany(@PathVariable Long companyId) {
-		companyService.deleteWorkerById(companyId);
+		companyService.deleteCompanyById(companyId);
 	}
 	
 

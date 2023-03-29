@@ -21,23 +21,23 @@ public class CompanyService {
 	}
 
 
-	public List<Company> getAllWorkers() {
+	public List<Company> getAllCompanies() {
 		return companyRepos.findAll();
 	}
 
 
-	public Company saveOneWorker(Company newCompany) {
+	public Company saveOneCompany(Company newCompany) {
 		return companyRepos.save(newCompany);
 	}
 
 
-	public Company getOneWorker(Long companyId) {	
+	public Company getOneCompany(Long companyId) {	
 		return companyRepos.findById(companyId).orElse(null);
 		
 	}
 
 
-	public Company updateOneWorker(Long companyId, Company newCompany) {
+	public Company updateOneCompany(Long companyId, Company newCompany) {
 		Optional<Company> nowCompany=companyRepos.findById(companyId);
 		if(nowCompany.isPresent()) {
 			Company foundCompany=nowCompany.get();
@@ -49,7 +49,7 @@ public class CompanyService {
 	}
 
 
-	public void deleteWorkerById(Long companyId) {
+	public void deleteCompanyById(Long companyId) {
 	companyRepos.deleteById(companyId);
 		
 	}

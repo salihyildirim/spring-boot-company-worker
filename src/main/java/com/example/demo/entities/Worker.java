@@ -20,7 +20,7 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 
-@Entity // tabloya maplenecek orm
+@Entity // tabloya maplenecek-orm
 @Table(name="worker")
 @Data //oto getter setter
 public class Worker {

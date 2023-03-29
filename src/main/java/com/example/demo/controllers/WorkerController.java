@@ -17,7 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.entities.Worker;
 import com.example.demo.requests.PostCreateRequest;
 import com.example.demo.requests.PostUpdateRequest;
+import com.example.demo.responses.WorkerResponse;
 import com.example.demo.services.WorkerService;
+
+import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
 
 @RestController
 @RequestMapping("/workers") 
@@ -29,7 +33,7 @@ public class WorkerController {
 		this.workerService = workerService;
 	}
 	@GetMapping
-	public List<Worker> getAllWorkers(@RequestParam Optional<Long> companyId){
+	public List<WorkerResponse> getAllWorkers(@RequestParam Optional<Long> companyId){
 		
 		return workerService.getAllWorkers(companyId);
 	}
@@ -40,9 +44,18 @@ public class WorkerController {
 	}
 	
 	@PostMapping
-	public Worker createOneWorker(@RequestBody PostCreateRequest postRequest) {
-		return workerService.createOneWorker(postRequest);
-	}
+	public Worker createOneWorker(@RequestBody PostCreateRequest postRequest) throws Exception  {
+		Worker worker=new Worker();
+			 try {
+				worker= workerService.createOneWorker(postRequest);
+			} catch (Exception e ) {
+				
+				e.printStackTrace();
+			}
+			 return worker;
+			
+		}
+	
 	
 	@PutMapping("/{workerId}")
 	public Worker updateWorker(@PathVariable Long workerId,@RequestBody PostUpdateRequest updateRequest) {
@@ -51,7 +64,11 @@ public class WorkerController {
 	
 	@DeleteMapping("/{workerId}")
 	public void deleteWorker(@PathVariable Long workerId) {
-		workerService.deleteWorker(workerId);
+		try {
+			workerService.deleteWorker(workerId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 }
